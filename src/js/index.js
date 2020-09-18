@@ -1,4 +1,4 @@
-window.onload(() => {
+window.onload = () => {
   var canvas = document.getElementById("canvas");
   var context = canvas.getContext("2d");
 
@@ -14,4 +14,4 @@ window.onload(() => {
 
     component.draw(context);
   }, 20);
-});
+};
