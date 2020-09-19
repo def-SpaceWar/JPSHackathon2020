@@ -38,7 +38,7 @@ window.onload = () => {
     new Platform(150, 700, 900, 10, "#00FF00", undefined),
     //2 top platforms
     new Platform(300, 450, 225, 10, "#00FF00", undefined),
-    new Platform(725, 300, 225, 10, "#00FF00", undefined),
+    new Platform(25, 300, 225, 10, "#00FF00", undefined),
   0
   ];
 
