@@ -10,6 +10,7 @@ class Component {
     this.x_speed = 0;
     this.y_speed = 0;
     this.gravity = 0.1;
+    this.drag = DRAG;
   }
 
   draw() {
@@ -25,10 +26,18 @@ class Component {
     this.x += this.x_speed;
     this.y += this.y_speed;
     this.y_speed += this.gravity;
+    this.x_speed *= this.drag;
 
     if (!!platforms) {
       for (var i = 0; i < platforms.length; i++) {
-        //
+        let other = platforms[i];
+
+        if (other.x <= this.x && other.x + other.w >= this.x) {
+          if (this.y + this.h > other.y) {
+            this.y = other.y - this.h;
+            this.y_speed = 0;
+          }
+        }
       }
     }
   }

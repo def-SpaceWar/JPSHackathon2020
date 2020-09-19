@@ -2,15 +2,43 @@ class Player extends Component {
   constructor(x, y, w, h, color, image, controls) {
     super(x, y, w, h, color, image);
     this.controls = controls;
+    this.moving = false;
   }
 
-  listen(event) {
+  getPhysics(platforms) {
+    if (this.moving) {
+      this.drag = 1;
+    } else {
+      this.drag = DRAG;
+    }
+    super.getPhysics(platforms);
+  }
+
+  listenKeyDown(event) {
     switch (event.key) {
       case this.controls.left:
-        this.x_speed += -5;
+        this.moving = true;
+        this.x_speed = -5;
         break;
       case this.controls.right:
-        this.x_speed += 10;
+        this.moving = true;
+        this.x_speed = 5;
+        break;
+      case this.controls.up:
+        break;
+      case this.controls.down:
+        break;
+    }
+  }
+
+  listenKeyUp(event) {
+    switch (event.key) {
+      case this.controls.left:
+        this.moving = false;
+        break;
+      case this.controls.right:
+        this.moving = false;
+        this.x_speed = 5;
         break;
       case this.controls.up:
         break;
