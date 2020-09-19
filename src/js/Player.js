@@ -41,6 +41,7 @@ class Player extends Component {
         this.x_speed = 5;
         break;
       case this.controls.up:
+        jump();
         break;
       case this.controls.down:
         break;

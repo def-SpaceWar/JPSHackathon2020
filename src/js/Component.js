@@ -33,7 +33,14 @@ class Component {
         let other = platforms[i];
 
         if (other.x <= this.x && other.x + other.w >= this.x) {
-          if (this.y + this.h > other.y) {
+          if (this.y + this.h > other.y && this.y < other.y) {
+            this.y = other.y - this.h;
+            this.y_speed = 0;
+          }
+        }
+
+        if (this.x <= other.x && this.x + this.w > other.x) {
+          if ((this.y + this.h) > other.y && this.y < other.y) {
             this.y = other.y - this.h;
             this.y_speed = 0;
           }
