@@ -1,7 +1,4 @@
 window.onload = () => {
-  var canvas = document.getElementById("canvas");
-  var context = canvas.getContext("2d");
-
   var component = new Component(100, 100, 100, 100, "#FF0000", undefined);
 
   function clear() {
@@ -12,6 +9,7 @@ window.onload = () => {
   setInterval(() => {
     clear();
 
-    component.draw(context);
+    component.draw();
+    component.getPhysics();
   }, 20);
 };
