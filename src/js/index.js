@@ -13,7 +13,7 @@ window.onload = () => {
     100,
     100,
     100,
-    "#ff0000",
+    "#aa0000",
     undefined,
     {
       left: "ArrowLeft",
@@ -34,10 +34,12 @@ window.onload = () => {
   });
 
   const platforms = [
-    new Platform(150, 700, 800, 10, "#00FF00", undefined),
-    new Platform(475, 450, 225, 10, "#00FF00", undefined),
-    new Platform(275, 300, 225, 10, "#00FF00", undefined),
-    new Platform(475, 300, 225, 10, "#00FF00", undefined),
+    //Base
+    new Platform(150, 700, 900, 10, "#00FF00", undefined),
+    //2 top platforms
+    new Platform(300, 450, 225, 10, "#00FF00", undefined),
+    new Platform(725, 300, 225, 10, "#00FF00", undefined),
+  0
   ];
 
   function clear() {

@@ -18,11 +18,11 @@ class Player extends Component {
     switch (event.key) {
       case this.controls.left:
         this.moving = true;
-        this.x_speed = -5;
+        this.x_speed = -20;
         break;
       case this.controls.right:
         this.moving = true;
-        this.x_speed = 5;
+        this.x_speed = 20;
         break;
       case this.controls.up:
         this.jump();
