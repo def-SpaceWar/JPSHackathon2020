@@ -7,8 +7,10 @@ class Player extends Component {
   listen(event) {
     switch (event.key) {
       case this.controls.left:
+        this.x_speed += -5;
         break;
       case this.controls.right:
+        this.x_speed += 10;
         break;
       case this.controls.up:
         break;
