@@ -25,8 +25,10 @@ class Player extends Component {
         this.x_speed = 5;
         break;
       case this.controls.up:
+        this.jump();
         break;
       case this.controls.down:
+        this.gravity = GRAVITY * 3;
         break;
     }
   }
@@ -41,10 +43,16 @@ class Player extends Component {
         this.x_speed = 5;
         break;
       case this.controls.up:
-        jump();
         break;
       case this.controls.down:
+        this.gravity = GRAVITY;
         break;
+    }
+  }
+
+  jump() {
+    if (this.isGrounded) {
+      this.y_speed = -JUMP_SPEED;
     }
   }
 }
