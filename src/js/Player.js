@@ -18,11 +18,11 @@ class Player extends Component {
     switch (event.key) {
       case this.controls.left:
         this.moving = true;
-        this.x_speed = -20;
+        this.x_speed = -5;
         break;
       case this.controls.right:
         this.moving = true;
-        this.x_speed = 20;
+        this.x_speed = 5;
         break;
       case this.controls.up:
         this.jump();
@@ -43,6 +43,7 @@ class Player extends Component {
         this.x_speed = 5;
         break;
       case this.controls.up:
+        this.jump();
         break;
       case this.controls.down:
         this.gravity = GRAVITY;
@@ -51,8 +52,8 @@ class Player extends Component {
   }
 
   jump() {
-    if (this.isGrounded) {
-      this.y_speed = -JUMP_SPEED;
+    if (Math.abs(this.y_speed) < JUMP_SPEED_MARGIN) {
+      this.y_speed = -JUMP_POWER;
     }
   }
 }

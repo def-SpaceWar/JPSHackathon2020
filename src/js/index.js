@@ -1,27 +1,19 @@
 var player, player2;
 
 window.onload = () => {
-  player = new Player(200, 100, 100, 100, "#00ddff", undefined, {
+  player = new Player(300, 100, 100, 100, "#00ddff", undefined, {
     left: "a",
     right: "d",
     up: "w",
     down: "s",
   });
 
-  player2 = new Player(
-    canvas.width - 300,
-    100,
-    100,
-    100,
-    "#aa0000",
-    undefined,
-    {
-      left: "ArrowLeft",
-      right: "ArrowRight",
-      up: "ArrowUp",
-      down: "ArrowDown",
-    }
-  );
+  player2 = new Player(800, 100, 100, 100, "#aa0000", undefined, {
+    left: "ArrowLeft",
+    right: "ArrowRight",
+    up: "ArrowUp",
+    down: "ArrowDown",
+  });
 
   document.addEventListener("keydown", (event) => {
     player.listenKeyDown(event);
@@ -38,8 +30,8 @@ window.onload = () => {
     new Platform(150, 700, 900, 10, "#00FF00", undefined),
     //2 top platforms
     new Platform(300, 450, 225, 10, "#00FF00", undefined),
-    new Platform(25, 300, 225, 10, "#00FF00", undefined),
-  0
+    new Platform(675, 450, 225, 10, "#00FF00", undefined),
+    0,
   ];
 
   function clear() {

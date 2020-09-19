@@ -11,7 +11,7 @@ class Component {
     this.y_speed = 0;
     this.gravity = GRAVITY;
     this.drag = DRAG;
-    this.isGrounded = false;
+    this.platforms = [];
   }
 
   draw() {
@@ -24,11 +24,7 @@ class Component {
   }
 
   getPhysics(platforms) {
-    if (this.isGrounded) {
-      this.x += this.x_speed;
-    } else {
-      this.x += this.x_speed / 4;
-    }
+    this.x += this.x_speed;
 
     this.y += this.y_speed;
     this.y_speed += this.gravity;
@@ -38,11 +34,12 @@ class Component {
       for (var i = 0; i < platforms.length; i++) {
         let other = platforms[i];
 
-        if (other.x <= this.x && other.x + other.w >= this.x) {
+        if (other.x <= this.x && other.x + other.w > this.x) {
           if (this.y + this.h > other.y && this.y < other.y) {
-            this.y = other.y - this.h;
+            if (this.y_speed > 0) {
+              this.y = other.y - this.h;
+            }
             this.y_speed = 0;
-            this.isGrounded = true;
           }
         } else if (this.x <= other.x && this.x + this.w > other.x) {
           if (this.y + this.h > other.y && this.y < other.y) {
@@ -50,10 +47,7 @@ class Component {
               this.y = other.y - this.h;
             }
             this.y_speed = 0;
-            this.isGrounded = true;
           }
-        } else {
-          this.isGrounded = false;
         }
       }
     }
