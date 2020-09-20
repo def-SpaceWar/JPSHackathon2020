@@ -27,11 +27,11 @@ window.onload = () => {
 
   const platforms = [
     //Base
-    new Platform(150, 700, 900, 10, "#00FF00", undefined),
+    new Platform(150, 700, 900, 30, undefined, longPlatform),
     //2 top platforms
-    new Platform(300, 450, 225, 10, "#00FF00", undefined),
-    new Platform(675, 450, 225, 10, "#00FF00", undefined),
-    0,
+    new Platform(300, 450, 225, 30, "#00FF00", undefined),
+    new Platform(675, 450, 225, 30, "#00FF00", undefined),
+    
   ];
 
   function clear() {

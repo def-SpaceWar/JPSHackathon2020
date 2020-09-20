@@ -9,11 +9,14 @@ class Platform {
   }
 
   draw() {
-    if (!this.image) {
+    if (this.image !== undefined) {
       context.fillStyle = this.color;
       context.fillRect(this.x, this.y, this.w, this.h);
     } else {
+      context.save();
+      context.scale(1, -1);
       context.drawImage(this.image, this.x, this.y, this.w, this.h);
+      context.restore();
     }
   }
 }
