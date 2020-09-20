@@ -6,7 +6,7 @@ function startScreen() {
     450,
     250,
     100,
-    "#0df",
+    { inactive: "#0ad", active: "#0df", pressed: "#0ff" },
     25,
     "#333",
     "Enter Game",
@@ -18,6 +18,9 @@ function startScreen() {
   // document.addEventListener("mouse");
 
   var interval = setInterval(() => {
+    context.font = "120px Comic Sans MS";
+    context.fillText("Cuboid Fight!", 250, 200, 700, 100);
+    
     playGameButton.draw();
   }, 20);
 }

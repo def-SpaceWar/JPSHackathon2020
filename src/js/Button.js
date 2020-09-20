@@ -4,7 +4,7 @@ class Button {
     y,
     w,
     h,
-    color,
+    colors,
     border_margin,
     border_color,
     text,
@@ -16,7 +16,7 @@ class Button {
     this.y = y;
     this.w = w;
     this.h = h;
-    this.color = color;
+    this.colors = colors;
     this.border_margin = border_margin;
     this.border_color = border_color;
     this.text = text;
@@ -33,7 +33,7 @@ class Button {
       this.w + this.border_margin * 2,
       this.h + this.border_margin * 2
     );
-    context.fillStyle = this.color;
+    context.fillStyle = this.colors.inactive;
     context.fillRect(this.x, this.y, this.w, this.h);
     context.fillStyle = this.text_color;
     context.font = this.font;
