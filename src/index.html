@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rectangles FIGHT! (Or whatever the title is.)</title>
-    <script src="js/start.js" defer></script>
-    <script src="js/Weapons.js" defer></script>
+    <script src="js/Health.js" defer></script>
     <script src="js/Platform.js" defer></script>
     <script src="js/Component.js" defer></script>
     <script src="js/Player.js" defer></script>
@@ -13,7 +12,19 @@
     <link href="css/main.css" type="text/css" rel="stylesheet" />
   </head>
   <body>
-    <img src="./images/platforms/LongPlatform.png" width="10" height="10" />
     <canvas id="canvas" width="1200" height="800"></canvas>
+    <script>
+      // This stuff loads up first
+      const canvas = document.getElementById("canvas");
+      const context = canvas.getContext("2d");
+
+      // constants
+      const DRAG = 0.95;
+      const GRAVITY = 0.35;
+      const JUMP_POWER = 5;
+      const JUMP_SPEED_MARGIN = 10;
+      const MAX_HEALTH = 100;
+      const ATTACK_RANGE = 100;
+    </script>
   </body>
 </html>
