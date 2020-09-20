@@ -11,12 +11,9 @@ class Player extends Component {
       health_params.border_color
     );
     this.attack_range = ATTACK_RANGE;
+    this.attack_damage = ATTACK_DAMAGE;
     this.other_player = undefined;
-  }
-
-  draw() {
-    super.draw();
-    this.health.draw();
+    this.direction = "right";
   }
 
   getPhysics(platforms) {
@@ -35,6 +32,11 @@ class Player extends Component {
       this.health.health = 0;
     } else if (this.y - this.h > canvas.height) {
       this.health.health = 0;
+    }
+
+    if (this.health.health === 0) {
+      this.x = -1000;
+      this.y = -1000;
     }
   }
 
@@ -55,6 +57,9 @@ class Player extends Component {
         case this.controls.down:
           this.gravity = GRAVITY * 3;
           break;
+        case this.controls.attack:
+          this.attack();
+          break;
       }
     }
   }
@@ -63,14 +68,15 @@ class Player extends Component {
     if (!(this.health.health <= 0)) {
       switch (event.key) {
         case this.controls.left:
+          this.direction = "left";
           this.moving = false;
           break;
         case this.controls.right:
+          this.direction = "right";
           this.moving = false;
           this.x_speed = 5;
           break;
         case this.controls.up:
-          this.jump();
           break;
         case this.controls.down:
           this.gravity = GRAVITY;
@@ -82,6 +88,26 @@ class Player extends Component {
   jump() {
     if (Math.abs(this.y_speed) < JUMP_SPEED_MARGIN) {
       this.y_speed = -JUMP_POWER;
+    }
+  }
+
+  attack() {
+    var distance =
+      Math.abs(this.other_player.x - this.x) *
+        Math.abs(this.other_player.x - this.x) +
+      (Math.abs(this.other_player.y - this.y) / 2) *
+        (Math.abs(this.other_player.y - this.y) / 2);
+    if (distance <= this.attack_range * this.attack_range) {
+      this.other_player.health.health -= this.attack_damage / round_number;
+      this.other_player.moving = false;
+      this.other_player.x_speed =
+        (this.other_player.x - this.x) /
+        ((10 * this.other_player.health.health) /
+          this.other_player.health.max_health);
+      this.other_player.y_speed =
+        (this.other_player.y - this.y) /
+        ((10 * this.other_player.health.health) /
+          this.other_player.health.max_health);
     }
   }
 }

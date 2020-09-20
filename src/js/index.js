@@ -1,43 +1,62 @@
 var player, player2, winner;
+var player1score = 0;
+var player2score = 0;
+var winner = "None";
 
 function startScreen() {
   var playGameButton = new Button(
-    475,
+    500,
     450,
     250,
     100,
-    { inactive: "#0ad", active: "#0df", pressed: "#0ff" },
+    { inactive: "#0ad", active: "#00ef6f", pressed: "#00ff00" },
     25,
     "#333",
     "Enter Game",
     "#000",
     "40px 'Comic Sans MS'",
-    game
+    () => {
+      clearInterval(interval);
+
+      game();
+    }
   );
 
-  // document.addEventListener("mouse");
+  canvas.addEventListener("mousemove", (event) => {
+    playGameButton.listenMouseMove(event);
+  });
+
+  canvas.addEventListener("mousedown", (event) => {
+    playGameButton.listenMouseDown(event);
+  });
+
+  canvas.addEventListener("mouseup", (event) => {
+    playGameButton.listenMouseUp(event);
+  });
 
   var interval = setInterval(() => {
     context.font = "120px Comic Sans MS";
-    context.fillText("Cuboid Fight!", 250, 200, 700, 100);
-    
+    context.fillText("Cuboid Fight!", 625, 200, 700, 100);
+
     playGameButton.draw();
   }, 20);
 }
 
 function game() {
+  let wait_frames = 100;
   player1 = new Player(
-    300,
+    290,
     100,
     100,
     100,
     "#00ddff",
     undefined,
     {
-      left: "a",
-      right: "d",
-      up: "w",
-      down: "s",
+      left: "s",
+      right: "f",
+      up: "e",
+      down: "d",
+      attack: "q",
     },
     {
       max_health: MAX_HEALTH,
@@ -49,7 +68,7 @@ function game() {
   );
 
   player2 = new Player(
-    800,
+    810,
     100,
     100,
     100,
@@ -60,6 +79,7 @@ function game() {
       right: "ArrowRight",
       up: "ArrowUp",
       down: "ArrowDown",
+      attack: "m",
     },
     {
       max_health: MAX_HEALTH,
@@ -92,13 +112,11 @@ function game() {
     new Platform(685, 470, 225, 25, "#A0522D", undefined),
   ];
 
-  function clear() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-  }
-
   // Game Loop
   let interval = setInterval(() => {
     clear();
+    player1.other_player = player2;
+    player2.other_player = player1;
 
     player1.draw();
     player1.getPhysics(platforms);
@@ -106,17 +124,124 @@ function game() {
     player2.draw();
     player2.getPhysics(platforms);
 
-    if (player1.health.health == 0) {
-      winner = "2";
-      interval.clearInterval();
-    } else if (player2.health.health == 0) {
-      winner = "1";
-      interval.clearInterval();
+    player1.health.draw();
+    player2.health.draw();
+
+    if (player1.health.health <= 0) {
+      if (player2.health.health <= 0) {
+        winner = "tie";
+      } else if (winner === "None" && winner !== "tie") {
+        winner = "2";
+      }
+      wait_frames -= 1;
+
+      if (wait_frames <= 0) {
+        player1.attack_damage = 0;
+        player2.attack_damage = 0;
+        clearInterval(interval);
+        winScreen();
+      }
+    } else if (player2.health.health <= 0) {
+      if (player1.health.health <= 0) {
+        winner = "tie";
+      } else if (winner === "None" && winner !== "tie") {
+        winner = "1";
+      }
+      wait_frames -= 1;
+
+      if (wait_frames <= 0) {
+        player1.attack_damage = 0;
+        player2.attack_damage = 0;
+        clearInterval(interval);
+        winScreen();
+      }
     }
+
     for (var i = 0; i < platforms.length; i++) {
       platforms[i].draw();
     }
+
+    showScore();
   }, 20);
+
+  function winScreen() {
+    var playGameButton = new Button(
+      500,
+      450,
+      250,
+      100,
+      { inactive: "#0ad", active: "#00ef6f", pressed: "#00ff00" },
+      25,
+      "#333",
+      "Play Again",
+      "#000",
+      "40px 'Comic Sans MS'",
+      () => {
+        clearInterval(interval);
+        game();
+      }
+    );
+
+    canvas.addEventListener("mousemove", (event) => {
+      playGameButton.listenMouseMove(event);
+    });
+
+    canvas.addEventListener("mousedown", (event) => {
+      playGameButton.listenMouseDown(event);
+    });
+
+    canvas.addEventListener("mouseup", (event) => {
+      playGameButton.listenMouseUp(event);
+    });
+
+    round_number += 1;
+    canvas.addEventListener("mouseup", (event) => {
+      playGameButton.listenMouseUp(event);
+    });
+
+    round_number += 1;
+    canvas.addEventListener("mouseup", (event) => {
+      playGameButton.listenMouseUp(event);
+    });
+
+    round_number += 1;
+    canvas.addEventListener("mouseup", (event) => {
+      playGameButton.listenMouseUp(event);
+    });
+
+    round_number += 1;
+    canvas.addEventListener("mouseup", (event) => {
+      playGameButton.listenMouseUp(event);
+    });
+
+    round_number += 1;
+
+    if (winner == "1") {
+      player1score += 1;
+    } else if (winner == "2") {
+      player2score += 1;
+    }
+
+    var interval = setInterval(() => {
+      clear();
+      context.fillStyle = "#000";
+      context.font = "120px Comic Sans MS";
+      if (winner !== "tie") {
+        context.fillText(`Player ${winner} WINS!`, 625, 300, 700, 100);
+      } else {
+        context.fillText(`TIE! Nobody won.`, 625, 300, 700, 100);
+      }
+
+      showScore();
+      playGameButton.draw();
+    }, 20);
+  }
+}
+
+function showScore() {
+  context.fillStyle = "#000";
+  context.font = "80px Comic Sans MS";
+  context.fillText(`${player1score} - ${player2score}`, 600, 150, 700, 100);
 }
 
 startScreen();

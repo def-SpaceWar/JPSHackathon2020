@@ -1,11 +1,5 @@
 canvas {
-    background-color: rgb(27, 145, 192);
-}
-
-styledimg {
-
-    background-image: url(/images/background.png);
-    background-repeat: no-repeat;
-    width: 600px;
-    height: 200px;
+  background-image: url("images/background.png");
+  background-repeat: no-repeat;
+  background-size: 1200px 800px;
 }

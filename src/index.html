@@ -18,6 +18,8 @@
       // This stuff loads up first
       const canvas = document.getElementById("canvas");
       const context = canvas.getContext("2d");
+      context.textAlign = "center";
+      var round_number = 1;
 
       // constants
       const DRAG = 0.95;
@@ -26,6 +28,11 @@
       const JUMP_SPEED_MARGIN = 10;
       const MAX_HEALTH = 100;
       const ATTACK_RANGE = 100;
+      const ATTACK_DAMAGE = 15;
+
+      function clear() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      }
     </script>
   </body>
 </html>
