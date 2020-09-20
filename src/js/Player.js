@@ -98,7 +98,7 @@ class Player extends Component {
       (Math.abs(this.other_player.y - this.y) / 2) *
         (Math.abs(this.other_player.y - this.y) / 2);
     if (distance <= this.attack_range * this.attack_range) {
-      this.other_player.health.health -= this.attack_damage / round_number;
+      this.other_player.health.health -= this.attack_damage;
       this.other_player.moving = false;
       this.other_player.x_speed =
         (this.other_player.x - this.x) /
