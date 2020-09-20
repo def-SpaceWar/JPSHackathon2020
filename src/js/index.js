@@ -43,6 +43,7 @@ function startScreen() {
 }
 
 function game() {
+  winner = "None";
   let wait_frames = 100;
   player1 = new Player(
     290,
@@ -101,13 +102,10 @@ function game() {
   });
 
   const platforms = [
-    //Base
     new Platform(150, 700, 900, 20, "#219321", undefined),
     new Platform(150, 720, 900, 30, "#A0522D", undefined),
-    //2 top platforms
     new Platform(290, 450, 225, 20, "#219321", undefined),
     new Platform(290, 470, 225, 25, "#A0522D", undefined),
-
     new Platform(685, 450, 225, 20, "#219321", undefined),
     new Platform(685, 470, 225, 25, "#A0522D", undefined),
   ];
@@ -130,23 +128,20 @@ function game() {
     if (player1.health.health <= 0) {
       if (player2.health.health <= 0) {
         winner = "tie";
-      } else if (winner === "None" && winner !== "tie") {
+      } else if (winner === "None") {
         winner = "2";
-      }
-      wait_frames -= 1;
-
-      if (wait_frames <= 0) {
-        player1.attack_damage = 0;
-        player2.attack_damage = 0;
-        clearInterval(interval);
-        winScreen();
       }
     } else if (player2.health.health <= 0) {
       if (player1.health.health <= 0) {
         winner = "tie";
-      } else if (winner === "None" && winner !== "tie") {
+      } else if (winner === "None") {
         winner = "1";
       }
+    }
+
+    console.log(winner);
+
+    if (player1.health.health <= 0 || player2.health.health <= 0) {
       wait_frames -= 1;
 
       if (wait_frames <= 0) {
@@ -194,22 +189,18 @@ function game() {
       playGameButton.listenMouseUp(event);
     });
 
-    round_number += 1;
     canvas.addEventListener("mouseup", (event) => {
       playGameButton.listenMouseUp(event);
     });
 
-    round_number += 1;
     canvas.addEventListener("mouseup", (event) => {
       playGameButton.listenMouseUp(event);
     });
 
-    round_number += 1;
     canvas.addEventListener("mouseup", (event) => {
       playGameButton.listenMouseUp(event);
     });
 
-    round_number += 1;
     canvas.addEventListener("mouseup", (event) => {
       playGameButton.listenMouseUp(event);
     });
