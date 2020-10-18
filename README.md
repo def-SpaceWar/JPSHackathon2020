@@ -10,3 +10,14 @@ The red square (player 2) controls are arrow keys and m to punch.
 (You have infinite jumps unless you're falling down!)
 
 You can die by getting punched too much or getting knocked out of the map!
+
+# UPDATE!
+
+This game is being continued in another github repo!
+
+https://github.com/def-SpaceWar/CuboidFight
+
+And this game is also public now!
+
+(You'll have to fullscreen or zoom out a bit.)
+https://cuboid-fight.netlify.app/
